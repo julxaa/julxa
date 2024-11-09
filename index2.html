@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>18 Urodziny Julki</title>
+    <style>
+        body {
+            font-family: "Times New Roman", serif;
+            background-color: #f8c8dc; /* Różowe tło */
+            color: #333333;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #d41c8b; /* Intensywny róż */
+            font-size: 36px;
+            margin: 20px 0;
+        }
+
+        .upload-section {
+            background-color: #e0e0e0;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        input[type="file"], button {
+            background-color: #c0c0c0; /* Srebrny */
+            color: #333;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover, input[type="file"]:hover {
+            background-color: #a9a9a9; /* Ciemniejszy srebrny */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>18 Urodziny Julki</h1>
+        <p>Witaj na stronie urodzinowej Julki! Zrób zdjęcie lub prześlij zdjęcie, aby uczcić ten wyjątkowy dzień!</p>
+        
+        <div class="upload-section">
+            <label for="fileUpload">Prześlij zdjęcie:</label>
+            <input type="file" id="fileUpload" accept="image/*">
+            
+            <p>Lub zrób zdjęcie teraz:</p>
+            <button onclick="openCamera()">Otwórz aparat</button>
+        </div>
+    </div>
+
+    <script>
+        function openCamera() {
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then(stream => {
+                        const video = document.createElement('video');
+                        video.srcObject = stream;
+                        video.play();
+                        alert("Aparat został otwarty!"); // Dodajemy prostą wiadomość dla użytkownika
+                    })
+                    .catch(error => {
+                        alert("Nie udało się otworzyć aparatu. Spróbuj ponownie.");
+                        console.error("Błąd aparatu:", error);
+                    });
+            } else {
+                alert("Twoje urządzenie nie obsługuje aparatu.");
+            }
+        }
+    </script>
+</body>
+</html>
